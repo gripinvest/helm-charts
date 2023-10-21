@@ -1,0 +1,23 @@
+{{- if .Values.configmaps }}
+{{- range $k, $c := $.Values.configmaps }}
+{{- $fullName := include "mark.fullname" $ }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $c.name | default (printf "%s-configmap" $fullName) }}
+  labels:
+  {{- if  $c.labels }}
+  {{ toYaml $c.labels | nindent 4 }}
+  {{- end}}
+  {{- include "mark.labels" $ | nindent 4 }}
+data:
+{{- range $key, $value := $c.configData }}
+  {{ $key }}: {{ $value | quote }}
+{{- end }}
+{{- range $file, $content := $c.configFiles }}
+  {{ $file }}: |-
+{{ $content | indent 4 }}
+{{- end }}
+---
+{{- end }}
+{{- end }}

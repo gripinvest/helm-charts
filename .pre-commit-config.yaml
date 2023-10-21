@@ -1,0 +1,17 @@
+fail_fast: true
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.3.0
+    hooks:
+      - id: trailing-whitespace
+      - id: check-merge-conflict
+      - id: end-of-file-fixer
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-json
+      - id: check-symlinks
+      - id: detect-private-key
+  - repo: https://github.com/norwoodj/helm-docs
+    rev: v1.11.0
+    hooks:
+      - id: helm-docs
