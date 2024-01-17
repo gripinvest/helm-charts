@@ -14,6 +14,7 @@ A Helm chart for Kubernetes
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| additionalIngress | object | `{}` |  |
 | affinity | object | `{}` | Affinity, the values of the affinity is identical to the syntax in k8s manifests. [Refer this](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) |
 | autoscaling | object | `{"averageCPUUtilizationPercentage":80,"enabled":true,"maxReplicas":10,"minReplicas":1}` | HPA configuration for the workloads |
 | autoscaling.enabled | bool | `true` | Enable the autoscaler |
