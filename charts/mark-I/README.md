@@ -8,7 +8,7 @@ A Helm chart for Kubernetes
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| phantomhive | <atul.khetan@gripivest.in> |  |
+| prayas | <prayas.mittal@gripivest.in> |  |
 
 ## Values
 

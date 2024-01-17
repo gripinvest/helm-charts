@@ -3,8 +3,8 @@ name: mark-1
 description: A Helm chart for Kubernetes
 
 maintainers:
-  - name: phantomhive
-    email: "atul.khetan@gripivest.in"
+  - name: prayas
+    email: "prayas.mittal@gripivest.in"
 
 # A chart can be either an 'application' or a 'library' chart.
 #
