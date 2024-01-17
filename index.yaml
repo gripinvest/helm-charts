@@ -3,6 +3,19 @@ entries:
   mark-1:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-01-17T22:23:32.095379+05:30"
+    description: A Helm chart for Kubernetes
+    digest: 361850d4e69f04f134742e1a64b273f52d5e247d0773d2e8a0271e047300c284
+    maintainers:
+    - email: atul.khetan@gripivest.in
+      name: phantomhive
+    name: mark-1
+    type: application
+    urls:
+    - mark-1-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-11-10T02:19:28.444004+05:30"
     description: A Helm chart for Kubernetes
     digest: fd1ebee87bb937a510a3b1f552c17fccf29a4b178c602d8b18ff9d7d13fc2f35
@@ -14,4 +27,4 @@ entries:
     urls:
     - https://github.com/gripinvest/helm-charts/releases/download/mark-1-1.0.0/mark-1-1.0.0.tgz
     version: 1.0.0
-generated: "2023-11-10T02:19:28.444066+05:30"
+generated: "2024-01-17T22:23:32.095418+05:30"
