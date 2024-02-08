@@ -113,6 +113,100 @@ spec:
           resources:
             {{- toYaml .Values.resources | default (dict) | nindent 12 }}
 
+      {{- if and .Values.additionalContainers }}
+      {{- range $k, $v := $.Values.additionalContainers }}
+
+        - name: {{ $v.name }}
+          image: {{ $v.image }}
+          imagePullPolicy: {{ $v.imagePullPolicy | default "IfNotPresent" }}
+
+          {{- if $v.securityContext }}
+          securityContext:
+            {{- toYaml $v.securityContext | nindent 12 }}
+          {{- end }}
+
+          {{- if $v.env }}
+          env:
+            {{- range $key, $value := $v.env }}
+            - name: {{ $key }}
+              value: {{ $value }}
+            {{- end }}
+          {{- end }}
+
+          {{- if $v.volumeMounts }}
+          volumeMounts:
+          {{- toYaml $v.volumeMounts | nindent 10 }}
+          {{- end }}
+
+          {{- if $v.envFrom }}
+          envFrom:
+          {{- toYaml $v.envFrom | nindent 10 }}
+          {{- end }}
+
+          {{- if $v.containerPort }}
+          ports:
+            - name: http
+              containerPort: {{ $v.containerPort }}
+              protocol: TCP
+          {{- end }}
+
+          {{- if $v.livenessProbe }}
+          {{- $lp := $v.livenessProbe }}
+          livenessProbe:
+            {{- if eq $lp.probeType "httpGet" }}
+            httpGet:
+              path: {{ $lp.path }}
+              port: {{ $v.containerPort }}
+              scheme: {{ $lp.scheme | default "HTTP" }}
+            {{- else if eq $lp.probeType "tcpSocket" }}
+            tcpSocket:
+              port: {{ $v.containerPort }}
+            {{- else if eq $lp.probeType "exec" }}
+            exec:
+              command:
+              {{ toYaml $lp.command}}
+            {{- end }}
+            initialDelaySeconds: {{ $lp.initialDelaySeconds }}
+            timeoutSeconds: {{ $lp.timeoutSeconds }}
+            periodSeconds: {{ $lp.periodSeconds }}
+            failureThreshold: {{ $lp.failureThreshold }}
+          {{- end }}
+
+          {{- if $v.readinessProbe }}
+          {{- $rp := $v.readinessProbe }}
+          readinessProbe:
+            {{- if eq $rp.probeType "httpGet" }}
+            httpGet:
+              path: {{ $rp.path }}
+              scheme: {{ $rp.scheme }}
+              port: {{ $v.containerPort | default "HTTP" }}
+            {{- else if eq $rp.probeType "tcpSocket" }}
+            tcpSocket:
+              port: {{ $v.containerPort }}
+            {{- else if eq $rp.probeType "exec" }}
+            exec:
+              command:
+              {{ toYaml $rp.command }}
+            {{- end }}
+            initialDelaySeconds: {{ $rp.initialDelaySeconds }}
+            timeoutSeconds: {{ $rp.timeoutSeconds }}
+            periodSeconds: {{ $rp.periodSeconds }}
+            failureThreshold: {{ $rp.failureThreshold }}
+          {{- end }}
+
+          {{- if $v.startupProbe }}
+          startupProbe:
+            {{ toYaml $v.startupProbe | nindent 12 }}
+          {{- end }}
+          
+          {{- if $v.resources }}
+          resources:
+            {{- toYaml $v.resources | default (dict) | nindent 12 }}
+          {{- end }}
+
+      {{- end }}
+      {{- end }}
+
       {{- if .Values.initContainer }}
       initContainers:
         {{- $initContainer := .Values.initContainer.image }}
