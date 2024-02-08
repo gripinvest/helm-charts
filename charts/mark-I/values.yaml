@@ -248,3 +248,35 @@ configmaps:
   #     game.properties: |
   #       enemy.types=aliens,monsters
   #       player.maximum-lives=5
+
+additionalContainers: []
+# - name: test-container
+#   image: postgres:latest
+#   securityContext: {}
+#   env:
+#     key1: value1
+#     key2: value2
+#   volumeMounts: []
+#   envFrom: []
+#   containerPort: 5000
+#   livenessProbe:
+#     probeType: "httpGet"
+#     path: "/"
+#     scheme: "HTTP"
+#     initialDelaySeconds: 30
+#     timeoutSeconds: 15
+#     periodSeconds: 15
+#     successThreshold: 1
+#     failureThreshold: 3
+#   readinessProbe:
+#     probeType: "httpGet"
+#     path: "/"
+#     scheme: "HTTP"
+#     initialDelaySeconds: 30
+#     timeoutSeconds: 15
+#     periodSeconds: 15
+#     successThreshold: 1
+#     failureThreshold: 3
+#   startupProbe: {}
+#   resources: {}
+
