@@ -1,6 +1,6 @@
 # mark-1
 
-![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.16.0](https://img.shields.io/badge/AppVersion-1.16.0-informational?style=flat-square)
+![Version: 1.2.0](https://img.shields.io/badge/Version-1.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.16.0](https://img.shields.io/badge/AppVersion-1.16.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -8,12 +8,14 @@ A Helm chart for Kubernetes
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| phantomhive | <atul.khetan@gripivest.in> |  |
+| prayas | <prayas.mittal@gripivest.in> |  |
 
 ## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| additionalContainers | list | `[]` |  |
+| additionalIngress | object | `{}` |  |
 | affinity | object | `{}` | Affinity, the values of the affinity is identical to the syntax in k8s manifests. [Refer this](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) |
 | autoscaling | object | `{"averageCPUUtilizationPercentage":80,"enabled":true,"maxReplicas":10,"minReplicas":1}` | HPA configuration for the workloads |
 | autoscaling.enabled | bool | `true` | Enable the autoscaler |
