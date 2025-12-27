@@ -3,6 +3,19 @@ entries:
   mark-1:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2025-12-27T09:20:22.068551952Z"
+    description: A Helm chart for Kubernetes
+    digest: 9c22f9081d929891491dffebd8b10ab893d6c8e803641e7778deb4d8c0d131a1
+    maintainers:
+    - email: prayas.mittal@gripivest.in
+      name: prayas
+    name: mark-1
+    type: application
+    urls:
+    - https://github.com/gripinvest/helm-charts/releases/download/mark-1-2.0.0/mark-1-2.0.0.tgz
+    version: 2.0.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2025-12-27T08:59:32.488080989Z"
     description: A Helm chart for Kubernetes
     digest: d1e34d03078b169ac7f860ecc04345d371b8ff619e5848a7b01c6371963c56f3
@@ -66,4 +79,4 @@ entries:
     urls:
     - https://github.com/gripinvest/helm-charts/releases/download/mark-1-1.0.0/mark-1-1.0.0.tgz
     version: 1.0.0
-generated: "2025-12-27T08:59:32.48810309Z"
+generated: "2025-12-27T09:20:22.068582329Z"
