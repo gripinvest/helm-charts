@@ -51,10 +51,10 @@ rollout:
     blueGreen:
       # Active service (Production traffic) - defaults to chart fullname
       activeService: mark-I
-      
+
       # Preview service (Staging/Test traffic) - defaults to <fullname>-preview
       previewService: mark-I-preview
-      
+
       # Set to false to wait for manual promotion in ArgoCD
       autoPromotionEnabled: false
 ```

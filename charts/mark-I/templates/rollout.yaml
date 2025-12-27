@@ -15,7 +15,7 @@ spec:
     canary:
       {{- toYaml .Values.rollout.strategy.canary | nindent 6 }}
     {{- else if .Values.rollout.strategy.blueGreen }}
-    blueGreen: 
+    blueGreen:
       activeService: {{ .Values.rollout.strategy.blueGreen.activeService | default (include "mark.fullname" .) }}
       previewService: {{ .Values.rollout.strategy.blueGreen.previewService | default (printf "%s-preview" (include "mark.fullname" .)) }}
       autoPromotionEnabled: {{ .Values.rollout.strategy.blueGreen.autoPromotionEnabled | default false }}
@@ -211,7 +211,7 @@ spec:
           startupProbe:
             {{ toYaml $v.startupProbe | nindent 12 }}
           {{- end }}
-          
+
           {{- if $v.resources }}
           resources:
             {{- toYaml $v.resources | default (dict) | nindent 12 }}
