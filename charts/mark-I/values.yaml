@@ -1,6 +1,6 @@
 # Default values for platform.
 # This is a YAML-formatted file.
-type: Deployment
+type: Rollout
 
 # -- ArgoCD Rollout configuration
 
