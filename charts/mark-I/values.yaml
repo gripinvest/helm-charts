@@ -2,6 +2,43 @@
 # This is a YAML-formatted file.
 type: Deployment
 
+# -- ArgoCD Rollout configuration
+
+# -- ArgoCD Rollout configuration
+# To use Rollout, make sure to set `type: Rollout` at the top level.
+rollout:
+  strategy:
+    # -- Canary strategy configuration (default)
+    # canary:
+    #   steps:
+    #     - setWeight: 20
+    #     - pause: {}
+    #     - setWeight: 50
+    #     - pause: { duration: 10 }
+
+    # -- Blue-Green Strategy configuration
+    # This strategy defines a preview service and an active service.
+    # New Rollouts are exposed on the preview service first.
+    # Promotion to active service triggers a traffic switch.
+    blueGreen:
+      # -- Name of the active service (traffic shifts here after promotion)
+      # This usually matches the fullname of the chart defined in _helpers.tpl
+      # Defaults to the chart's fullname if not specified.
+      # activeService: mark-I
+
+      # -- Name of the preview service (new version traffic goes here first)
+      # This service is automatically created by the chart when blueGreen is enabled.
+      # Defaults to "<fullname>-preview" if not specified.
+      # previewService: mark-I-preview
+
+      # -- Set to false for manual promotion (requires user intervention via ArgoCD UI/CLI to switch traffic)
+      # If true, promotion happens automatically after the new replicaset is ready.
+      autoPromotionEnabled: false
+
+      # -- Optional: Delay in seconds before scaling down the old replicaset after promotion
+      # This allows for a quick rollback if needed.
+      scaleDownDelaySeconds: 1800
+
 # -- Replica Count, this works for Deployment and Statefulset.
 replicaCount: 1
 # -- Global flag to enable or disbale the [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) in the workloads, if set to false, the values provided for security won't take effect
@@ -279,4 +316,3 @@ additionalContainers: []
 #     failureThreshold: 3
 #   startupProbe: {}
 #   resources: {}
-

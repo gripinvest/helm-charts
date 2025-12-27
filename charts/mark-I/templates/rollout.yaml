@@ -1,6 +1,6 @@
-{{- if eq .Values.type  "Deployment" }}
-apiVersion: apps/v1
-kind: Deployment
+{{- if eq .Values.type "Rollout" }}
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: {{ include "mark.fullname" . }}
   labels:
@@ -10,6 +10,19 @@ spec:
   selector:
     matchLabels:
       {{- include "mark.selectorLabels" . | nindent 6 }}
+  strategy:
+    {{- if .Values.rollout.strategy.canary }}
+    canary:
+      {{- toYaml .Values.rollout.strategy.canary | nindent 6 }}
+    {{- else if .Values.rollout.strategy.blueGreen }}
+    blueGreen:
+      activeService: {{ .Values.rollout.strategy.blueGreen.activeService | default (include "mark.fullname" .) }}
+      previewService: {{ .Values.rollout.strategy.blueGreen.previewService | default (printf "%s-preview" (include "mark.fullname" .)) }}
+      autoPromotionEnabled: {{ .Values.rollout.strategy.blueGreen.autoPromotionEnabled | default false }}
+      {{- if .Values.rollout.strategy.blueGreen.scaleDownDelaySeconds }}
+      scaleDownDelaySeconds: {{ .Values.rollout.strategy.blueGreen.scaleDownDelaySeconds }}
+      {{- end }}
+    {{- end }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
