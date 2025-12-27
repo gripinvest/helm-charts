@@ -7,8 +7,13 @@ metadata:
     {{- include "mark.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
+    {{- if eq .Values.type "Rollout" }}
+    apiVersion: argoproj.io/v1alpha1
+    kind: Rollout
+    {{- else }}
     apiVersion: apps/v1
     kind: Deployment
+    {{- end }}
     name: {{ include "mark.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
